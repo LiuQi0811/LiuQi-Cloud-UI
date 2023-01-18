@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-     <el-form :model="loginForm" class="login-form">
+     <el-form :model="loginForm" :rules="loginRules" class="login-form">
         <h3 class="title">LQ后台管理系统</h3>
         <!-- 用户名 -->
        <el-form-item prop="username">
@@ -65,6 +65,10 @@ export default {
                 password: 'admin',
                 verificationCode: '',
                 rememberMe: false
+            },
+            loginRules:{
+                username:[{required:true,trigger: 'blur',message:'请输入您的账号'}],
+                password:[{required:true,trigger:'blur',message:'请输入您的密码'}]
             },
             loading: false,//登录状态
         }
