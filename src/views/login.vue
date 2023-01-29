@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import {login} from '@/api/login.js';
+import {login,getCodeImg} from '@/api/login.js';
 export default {
     data(){
         return{
@@ -69,16 +69,30 @@ export default {
             },
             loginRules:{
                 username:[{required:true,trigger: 'blur',message:'请输入您的账号'}],
-                password:[{required:true,trigger:'blur',message:'请输入您的密码'}]
+                password:[{required:true,trigger:'blur',message:'请输入您的密码'}],
+                verificationCode: [{ required: true, trigger: "change", message: "请输入验证码" }]
             },
             loading: false,//登录状态
         }
     },
     methods:{
-        
+        getVerificationCode(){ // 获取登录验证码
+            getCodeImg().then(res=>{
+                console.log('获取登录验证码.... ',res)
+            })
+        },
         handleLogin(){ // 登录方法
             console.log("获取form表单信息 ",this.$refs)
+            this.loading = true // 登录状态加载中
+            login(this.loginForm.username, this.loginForm.password).then(res=>{
+                console.log('请求主体 ',res)
+                console.log('获取请求数据 ',res.data)
+            })
+            
         }
+    },
+    created(){
+        this.getVerificationCode()
     }
 }
 </script>
