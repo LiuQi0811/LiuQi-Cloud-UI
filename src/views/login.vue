@@ -75,6 +75,9 @@ export default {
             loading: false,//登录状态
         }
     },
+    created(){
+        this.getVerificationCode()
+    },
     methods:{
         getVerificationCode(){ // 获取登录验证码
             getCodeImg().then(res=>{
@@ -90,9 +93,6 @@ export default {
             })
             
         }
-    },
-    created(){
-        this.getVerificationCode()
     }
 }
 </script>

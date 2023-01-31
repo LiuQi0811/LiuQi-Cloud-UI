@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import request from '@/utils/http/request'
 
 //登录方法 gateway /auth 前缀
 export function login(username,password){
